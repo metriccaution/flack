@@ -12,7 +12,7 @@ import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.metriccaution.flack.mouse.Mouse;
-import com.github.metriccaution.flack.mouse.executor.MouseMove;
+import com.github.metriccaution.flack.mouse.MouseMove;
 
 @WebSocket
 public class WebsocketHandler {

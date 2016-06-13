@@ -1,4 +1,4 @@
-package com.github.metriccaution.flack.mouse.executor;
+package com.github.metriccaution.flack.mouse;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

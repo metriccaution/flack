@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
       browserify : {
         client: {
-          src: ['js/index.js'],
+          src: ['app/js/index.js'],
           dest: 'dist/app.js'
         }
       },
@@ -11,7 +11,7 @@ module.exports = function(grunt) {
       copy: {
         main: {
           expand:true,
-          cwd:'html',
+          cwd:'app/html',
           src: '*',
           dest: 'dist/',
         }
