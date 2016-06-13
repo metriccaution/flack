@@ -71,7 +71,8 @@ var config = {
 
 var location = {
   x : 0,
-  y : 0
+  y : 0,
+  type : 'MouseMove'
 };
 
 var ticker;

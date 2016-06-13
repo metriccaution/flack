@@ -1,9 +1,9 @@
-package com.github.metriccaution.flack.mouse;
+package com.github.metriccaution.flack.mouse.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MouseMove {
+public class MouseMove implements Model {
 	private final int x;
 	private final int y;
 
