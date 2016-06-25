@@ -1,0 +1,25 @@
+#scroll-pad {
+  width : 100%;
+  height : 90%;
+  background : #F0F0F0;
+}
+
+#btn-container {
+  height : 10%;
+}
+
+#btn-one {
+  width : 50%;
+  float : right;
+  width : 50%;
+  height : 100%;
+  background: #555555;
+}
+
+#btn-two {
+  width : 50%;
+  float : left;
+  width : 50%;
+  height : 100%;
+  background: #777777;
+}
