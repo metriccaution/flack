@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.function.BiConsumer;
 
 import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketError;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
@@ -44,6 +45,11 @@ public class WebsocketHandler {
 	@OnWebSocketError
 	public void onError(final Session user, final Throwable ex) {
 		ex.printStackTrace();
+	}
+
+	@OnWebSocketClose
+	public void close(final Session user, final int statusCode, final String reason) {
+		mouse.cleanUp();
 	}
 
 	private static enum MethodMap {
