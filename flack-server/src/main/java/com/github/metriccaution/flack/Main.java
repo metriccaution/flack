@@ -10,11 +10,10 @@ public class Main {
 		webSocket("/control", WebsocketHandler.class);
 		init();
 
-		/*before("/control", (req, res) -> {
-			// TODO - WS access control
-			System.out.println(req.pathInfo());
-			System.out.println(req.requestMethod());
-		});*/
+		get("/kill", (req, res) -> {
+			stop();
+			return "A friend of mine is out of time";
+		});
 	}
 
 }
