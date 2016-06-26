@@ -5,6 +5,7 @@ import static spark.Spark.*;
 public class Main {
 
 	public static void main(final String[] args) {
+
 		staticFileLocation("/static");
 		webSocket("/control", WebsocketHandler.class);
 		init();
