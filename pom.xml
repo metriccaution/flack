@@ -18,6 +18,11 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Plugin versions -->
+		<build.version>3.5.1</build.version>
+		<exec.version>1.5.0</exec.version>
+		<clean.version>3.0.0</clean.version>
+		<resources.version>2.7</resources.version>
 		<!-- Dependency versions -->
 		<spark.version>2.3</spark.version>
 		<jackson.version>2.7.4</jackson.version>
@@ -47,5 +52,33 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${build.version}</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${clean.version}</version>
+				</plugin>
+			</plugins>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>${clean.version}</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${resources.version}</version>
+			</plugin>
+		</pluginManagement>
+	</build>
 
 </project>

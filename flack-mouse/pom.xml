@@ -3,25 +3,19 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>com.github.metriccaution.flack</groupId>
-  	<artifactId>flack</artifactId>
-  	<version>0.0.1-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<groupId>com.github.metriccaution.flack</groupId>
+		<artifactId>flack</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 
-  <artifactId>flack-mouse</artifactId>
+	<artifactId>flack-mouse</artifactId>
 
 	<build>
 		<plugins>
-			<!-- Set the Java build version correctly in subprojects -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

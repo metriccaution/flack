@@ -3,25 +3,49 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>com.github.metriccaution.flack</groupId>
-  	<artifactId>flack</artifactId>
-  	<version>0.0.1-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<groupId>com.github.metriccaution.flack</groupId>
+		<artifactId>flack</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 
-  <artifactId>flack-ui</artifactId>
+	<artifactId>flack-ui</artifactId>
 
 	<build>
 		<plugins>
-			<!-- Set the Java build version correctly in subprojects -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
+				<artifactId>maven-clean-plugin</artifactId>
 				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
+					<filesets>
+						<fileset>
+							<directory>${basedir}/../flack-server/src/main/resources/static</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/../flack-server/src/main/resources/static</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/webapp/dist</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
