@@ -27,6 +27,7 @@
 		<!-- Dependency versions -->
 		<spark.version>2.3</spark.version>
 		<jackson.version>2.7.4</jackson.version>
+		<junit.version>4.12</junit.version>
 	</properties>
 
 	<dependencyManagement>
@@ -51,6 +52,12 @@
 				<artifactId>jackson-databind</artifactId>
 				<version>${jackson.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 

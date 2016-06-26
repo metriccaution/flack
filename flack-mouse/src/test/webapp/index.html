@@ -1,0 +1,68 @@
+<html>
+<head>
+  <title>Event tester</title>
+  <style>
+    div#event-target {
+        width: 50%;
+        height: 100%;
+        background: red;
+        float: left;
+    }
+
+    div#event-list {
+        margin-left: 50%;
+        height: 100%;
+        overflow: auto;
+    }
+
+    .item {
+      padding : 10px;
+    }
+
+    .title {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="event-target"></div>
+  <div id="event-list"></div>
+
+  <script>
+    var displayText = function(title, message) {
+      var list = document.querySelector('#event-list');
+
+      var el = document.createElement('div');
+      el.className += " item";
+
+      var titleEl = document.createElement('div');
+      titleEl.textContent = title;
+      titleEl.className += " title";
+      el.appendChild(titleEl);
+
+      var messageEl = document.createElement('div');
+      messageEl.textContent = message;
+      messageEl.className += " message";
+      el.appendChild(messageEl);
+
+      list.firstChild ? list.insertBefore(el, list.firstChild) : list.appendChild(el);
+    };
+
+    var addListener = function(event, transform) {
+      var target = document.querySelector('#event-target');
+      target.addEventListener(event, function(e) {
+        var message = transform ? transform(e) : '';
+        displayText(event, message);
+      });
+    };
+
+    addListener('mousedown', function(e) {
+      return e.button;
+    });
+
+    addListener('mouseup', function(e) {
+      return e.button;
+    });
+  </script>
+</body>
+</html>

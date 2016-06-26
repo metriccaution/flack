@@ -4,7 +4,7 @@ window.onload = function() {
   ms('#scroll-pad');
 
   var mc = require('./mouseClick/mouseClickController');
-  mc('#btn-one', [2]);
+  mc('#btn-one', [3]);
   mc('#btn-two', [1]);
 };
 
