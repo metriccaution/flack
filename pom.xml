@@ -11,6 +11,7 @@
 
 	<modules>
 		<module>flack-main</module>
+		<module>flack-ui</module>
 	</modules>
 
 	<properties>
@@ -18,10 +19,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Maven plugin versions -->
 		<build.version>3.5.1</build.version>
-		<exec.version>1.5.0</exec.version>
-		<clean.version>3.0.0</clean.version>
-		<resources.version>2.7</resources.version>
 		<shade.version>2.4.3</shade.version>
+		<jar.version>3.0.2</jar.version>
 		<!-- Dependency versions -->
 		<spark.version>2.6.0</spark.version>
 		<jackson.version>2.7.4</jackson.version>
@@ -31,6 +30,11 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>com.github.metriccaution.flack</groupId>
+				<artifactId>flack-ui</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
@@ -78,17 +82,14 @@
 					</configuration>
 				</plugin>
 				<plugin>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>${clean.version}</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>${resources.version}</version>
-				</plugin>
-				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-shade-plugin</artifactId>
 					<version>${shade.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${jar.version}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
