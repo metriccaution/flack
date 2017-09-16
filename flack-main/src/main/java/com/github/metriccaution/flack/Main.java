@@ -9,6 +9,7 @@ import com.github.metriccaution.flack.input.service.InputEventParser;
 import com.github.metriccaution.flack.input.service.Mouse;
 import com.github.metriccaution.flack.input.service.MouseSubscriber;
 import com.github.metriccaution.flack.input.ws.InputSocket;
+import com.github.metriccaution.flack.ui.StaticResourcesConfig;
 import com.google.common.eventbus.EventBus;
 
 /**
@@ -17,6 +18,8 @@ import com.google.common.eventbus.EventBus;
 public class Main {
 
 	// TODO - Define an actual logger
+	// TODO - Application-level crypto (WSS isn't really an option without massive cert warnings)
+	// TODO - Some sort of auth (e.g. PIN)
 
 	public static void main(final String[] args) throws Exception {
 		final InputEventParser parser = new InputEventParser(new ObjectMapper());
@@ -28,7 +31,7 @@ public class Main {
 		final EventBus messages = new EventBus();
 		messages.register(service);
 
-		staticFileLocation("/static");
+		staticFileLocation(StaticResourcesConfig.STATIC_RESOURCES_DIR);
 		webSocket("/control", new InputSocket(parser, messages));
 
 		port(9731);
