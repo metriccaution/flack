@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   // TODO - Source map
-  entry: path.resolve(process.cwd(), 'app/main.js'),
+  entry: path.resolve(process.cwd(), 'app/main.jsx'),
   output: {
     path: path.resolve(process.cwd(), 'app/bundle.js')
   },

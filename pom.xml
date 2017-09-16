@@ -20,6 +20,7 @@
 		<!-- Maven plugin versions -->
 		<build.version>3.5.1</build.version>
 		<shade.version>2.4.3</shade.version>
+        <exec.version>1.6.0</exec.version>
 		<jar.version>3.0.2</jar.version>
 		<!-- Dependency versions -->
 		<spark.version>2.6.0</spark.version>
@@ -91,6 +92,11 @@
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>${jar.version}</version>
 				</plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+					<version>${exec.version}</version>
+                </plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
