@@ -9,7 +9,7 @@ module.exports = {
   devServer: {
     inline: true,
     contentBase: path.resolve(process.cwd(), 'app'),
-    port: 9731
+    port: 9732
   },
   module: {
     loaders: [
