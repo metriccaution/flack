@@ -7,9 +7,10 @@ import wsSub from './ws/reduxSubscriber'
 import { move } from './mouse/actions'
 
 const store = createStore()
-wsSub(store)
+wsSub()(store)
 
 store.dispatch(move({x : 5, y : 5}))
+store.dispatch(move({x : 10, y : 10}))
 setTimeout(() => store.dispatch(move({x : 0, y : 0})), 1000)
 
 const El = () => <div>
