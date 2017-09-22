@@ -1,12 +1,17 @@
 import ws from './main'
 
 /*
+ * Get the time now
+ */
+const now = () => new Date().getTime()
+
+/*
  * Limit how often a mapper can produce actions
  */
-const limitRate = (maxRate) => (fcn) => {
+const limitRate = (maxRate, getTime = now) => (fcn) => {
   let lastCall = 0
   return (current, prev) => {
-    const now = new Date().getTime()
+    const now = getTime()
     if (now < lastCall + maxRate)
       return []
 
@@ -52,12 +57,13 @@ export default () => {
 
   return (store) => {
     const wsConfig = store.getState().websocket
-    const send = (a) => ws(wsConfig)
+    const send = ws(wsConfig)
     const stateMapper = storeToActions()
 
     store.subscribe(() => {
       const currentState = store.getState()
-      stateMapper(currentState, prevState).forEach(send)
+      const actions = stateMapper(currentState, prevState)
+      actions.forEach(send)
       prevState = currentState
     })
   }
