@@ -1,10 +1,8 @@
-const defaultState = {
-  url: 'ws://localhost:9731/control'
-}
+import { combineReducers } from 'redux'
+import config from './configReducer'
+import messages from './messagesReducer'
 
-/*
- * Stores the current config for the websocket - Currently static
- */
-export default (state = defaultState, action) => {
-  return state
-}
+export default combineReducers({
+  config,
+  messages
+})
