@@ -68,7 +68,6 @@ export default class MousePad extends React.Component {
   }
 
   resetPosition() {
-    console.log('Ending')
     this.moveMouse({x : 0, y : 0})
   }
 

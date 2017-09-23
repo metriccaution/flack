@@ -20,13 +20,14 @@
 		<!-- Maven plugin versions -->
 		<build.version>3.5.1</build.version>
 		<shade.version>2.4.3</shade.version>
-        <exec.version>1.6.0</exec.version>
+		<exec.version>1.6.0</exec.version>
 		<jar.version>3.0.2</jar.version>
 		<!-- Dependency versions -->
 		<spark.version>2.6.0</spark.version>
 		<jackson.version>2.7.4</jackson.version>
 		<junit.version>4.12</junit.version>
 		<guava.version>23.0</guava.version>
+		<slf4j.version>1.7.25</slf4j.version>
 	</properties>
 
 	<dependencyManagement>
@@ -66,7 +67,11 @@
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -92,11 +97,11 @@
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>${jar.version}</version>
 				</plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
 					<version>${exec.version}</version>
-                </plugin>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>

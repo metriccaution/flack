@@ -2,6 +2,7 @@ package com.github.metriccaution.flack.input.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 
 /**
  * An instruction to move the mouse
@@ -23,6 +24,14 @@ public class MouseMoveEvent implements InputEventModel {
 
 	public int getY() {
 		return y;
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+				.add("x", x)
+				.add("y", y)
+				.toString();
 	}
 
 }
