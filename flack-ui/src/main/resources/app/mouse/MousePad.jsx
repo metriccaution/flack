@@ -7,16 +7,18 @@ const style = {
   margin: '50px'
 }
 
-const lock = (min, max) => (value) => Math.min(Math.max(value, min), max)
-const proportion = lock(-1, 1)
+const proportion = (outMin, outMax) => (value, inMin, inMax) => {
+  const limitedValue = Math.max(Math.min(value, inMax), inMin)
+  const inputRatio = (limitedValue - inMin) / (inMax - inMin)
+  return outMin + inputRatio * (outMax - outMin)
+}
 
-const relativise = (eventLocation, targetBox) => {
-  const width = (targetBox.right - targetBox.left)
-  const height = (targetBox.bottom - targetBox.top)
+const relativise = (eventLocation, targetBox, max) => {
+  const scale = proportion(-max, max)
 
   return {
-    x : proportion((eventLocation.x - width / 2) / width),
-    y : proportion((eventLocation.y - height / 2) / height)
+    x : scale(eventLocation.x, targetBox.left, targetBox.right),
+    y : scale(eventLocation.y, targetBox.top, targetBox.bottom)
   }
 }
 
@@ -68,15 +70,15 @@ export default class MousePad extends React.Component {
   }
 
   resetPosition() {
-    this.moveMouse({x : 0, y : 0})
+    this.moveMouse({x : 0.5, y : 0.5})
   }
 
   moveMouse(position, containerPosition = {top : 0, bottom : 1, left : 0, right : 1}) {
-    const relativePosition = relativise(position, containerPosition)
+    const relativePosition = relativise(position, containerPosition, this.props.maxPerTick)
     this.setState({
       position: {
-        x: Math.floor(relativePosition.x * this.props.maxPerTick),
-        y: Math.floor(relativePosition.y * this.props.maxPerTick)
+        x: Math.floor(relativePosition.x),
+        y: Math.floor(relativePosition.y)
       }
     })
   }
