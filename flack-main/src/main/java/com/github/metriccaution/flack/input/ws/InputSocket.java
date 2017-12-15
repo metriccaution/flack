@@ -2,10 +2,10 @@ package com.github.metriccaution.flack.input.ws;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.io.IOException;
-
 import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.annotations.*;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketError;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
+import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +33,7 @@ public class InputSocket {
 	}
 
 	@OnWebSocketMessage
-	public void onMessage(final Session user, final String message) throws IOException {
+	public void onMessage(final Session user, final String message) {
 		try {
 			final InputEventModel event = parser.apply(message);
 			LOGGER.info("Input: " + event);
@@ -46,14 +46,6 @@ public class InputSocket {
 	@OnWebSocketError
 	public void onError(final Session user, final Throwable ex) {
 		LOGGER.error("Websocket message exception", ex);
-	}
-
-	@OnWebSocketConnect
-	public void onConnect(final Session session) {
-	}
-
-	@OnWebSocketClose
-	public void close(final Session user, final int statusCode, final String reason) {
 	}
 
 }

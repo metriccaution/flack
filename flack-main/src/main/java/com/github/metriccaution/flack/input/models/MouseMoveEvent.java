@@ -36,8 +36,8 @@ public class MouseMoveEvent implements InputEventModel {
 
 		final MouseMoveEvent other = (MouseMoveEvent)obj;
 
-		return Objects.equals(getX(), other.getX())
-				&& Objects.equals(getY(), other.getY());
+		return getX() == other.getX()
+				&& getY() == other.getY();
 	}
 
 	@Override

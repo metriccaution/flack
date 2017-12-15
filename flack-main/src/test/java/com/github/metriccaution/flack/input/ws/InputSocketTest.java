@@ -44,7 +44,7 @@ public class InputSocketTest {
 	}
 
 	@Test
-	public void onMessage_invalidJson() throws IOException {
+	public void onMessage_invalidJson() {
 		final EventBus eventBus = mock(EventBus.class);
 		final InputSocket socket = new InputSocket(new InputEventParser(new ObjectMapper()), eventBus);
 		socket.onMessage(mock(Session.class), "}{");
@@ -52,21 +52,7 @@ public class InputSocketTest {
 	}
 
 	@Test
-	public void onConnect_doesNothing() throws IOException {
-		final EventBus eventBus = mock(EventBus.class);
-		final InputSocket socket = new InputSocket(new InputEventParser(new ObjectMapper()), eventBus);
-		socket.onConnect(mock(Session.class));
-	}
-
-	@Test
-	public void onClose_doesNothing() throws IOException {
-		final EventBus eventBus = mock(EventBus.class);
-		final InputSocket socket = new InputSocket(new InputEventParser(new ObjectMapper()), eventBus);
-		socket.close(mock(Session.class), 20, "Blah");
-	}
-
-	@Test
-	public void onError_doesNothing() throws IOException {
+	public void onError_doesNothing() {
 		final EventBus eventBus = mock(EventBus.class);
 		final InputSocket socket = new InputSocket(new InputEventParser(new ObjectMapper()), eventBus);
 		socket.onError(mock(Session.class), new Exception());

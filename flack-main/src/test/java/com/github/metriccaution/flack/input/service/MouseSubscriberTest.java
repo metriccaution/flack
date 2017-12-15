@@ -35,7 +35,9 @@ public class MouseSubscriberTest {
 	public void subscribe_unhandledEvent() {
 		final Mouse mouse = mock(Mouse.class);
 		final MouseSubscriber subscriber = new MouseSubscriber(mouse);
-		subscriber.subscribe(new InputEventModel() {});
+		subscriber.subscribe(new InputEventModel() {
+			// Just something else
+		});
 
 		verify(mouse, never()).move(any(Integer.class), any(Integer.class));
 		verify(mouse, never()).scroll(any(Integer.class));
