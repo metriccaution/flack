@@ -1,10 +1,10 @@
 import React from 'react'
 
 const style = {
-  height: '200px',
-  width: '200px',
+  height: '400px',
+  width: '400px',
   backgroundColor: 'chartreuse',
-  margin: '50px'
+  // margin: '50px'
 }
 
 const proportion = (outMin, outMax) => (value, inMin, inMax) => {
