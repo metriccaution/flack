@@ -12,6 +12,15 @@
 	<artifactId>flack-ui</artifactId>
 
 	<build>
+		<resources>
+			<!-- Don't try to pack up the whole node dependency tree -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>dist/**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -19,31 +28,31 @@
 				<configuration>
 					<includes>
 						<include>/dist/**</include>
-                        <include>/com/github/metriccaution/**</include>
+						<include>/com/github/metriccaution/**</include>
 					</includes>
 				</configuration>
 			</plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>build-ui</id>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <executable>npm</executable>
-                            <arguments>
-                                <argument>run</argument>
-                                <argument>dist</argument>
-                            </arguments>
-                            <workingDirectory>${project.basedir}/src/main/resources</workingDirectory>
-                        </configuration>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>build-ui</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<executable>npm</executable>
+							<arguments>
+								<argument>run</argument>
+								<argument>dist</argument>
+							</arguments>
+							<workingDirectory>${project.basedir}/src/main/resources</workingDirectory>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>
