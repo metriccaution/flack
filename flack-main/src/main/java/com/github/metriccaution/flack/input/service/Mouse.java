@@ -1,25 +1,35 @@
 package com.github.metriccaution.flack.input.service;
 
-import java.awt.MouseInfo;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static java.lang.Math.addExact;
+
 import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.util.function.IntConsumer;
+import java.util.function.Supplier;
 
 /**
  * A wrapper to handle mouse events
  */
 public class Mouse {
 	private final Robot robot;
+	private final Supplier<Point> mouseLocation;
 
 	/**
 	 * Create a new mouse object around the AWT base control object
 	 *
 	 * @param robot
 	 *            The thing we actually use to move the mouse
+	 * @param mouseLocation
+	 *            Supplies the current location of the mouse pointer
 	 */
-	public Mouse(final Robot robot) {
+	public Mouse(final Robot robot, final Supplier<Point> mouseLocation) {
+		checkNotNull(robot);
+		checkNotNull(mouseLocation);
+
 		this.robot = robot;
+		this.mouseLocation = mouseLocation;
 	}
 
 	/**
@@ -32,8 +42,8 @@ public class Mouse {
 	 * @return This object again
 	 */
 	public Mouse move(final int x, final int y) {
-		final Point p = MouseInfo.getPointerInfo().getLocation();
-		robot.mouseMove(p.x + x, p.y + y);
+		final Point p = mouseLocation.get();
+		robot.mouseMove(addExact(p.x, x), addExact(p.y, y));
 		return this;
 	}
 
@@ -59,6 +69,7 @@ public class Mouse {
 	 * @return This object again
 	 */
 	public Mouse click(final Click click, final boolean down) {
+		// TODO - Does this allow for having multiple buttons held down at once?
 		final IntConsumer method = down ? robot::mousePress : robot::mouseRelease;
 		method.accept(click.getAwtCode());
 		return this;
@@ -68,7 +79,9 @@ public class Mouse {
 	 * Maps our own protocol button codes to the AWT ones
 	 */
 	public static enum Click {
-		LEFT(0, InputEvent.BUTTON1_MASK), RIGHT(1, InputEvent.BUTTON3_MASK), MIDDLE(2, InputEvent.BUTTON2_MASK);
+		LEFT(0, InputEvent.BUTTON1_MASK),
+		RIGHT(1, InputEvent.BUTTON3_MASK),
+		MIDDLE(2, InputEvent.BUTTON2_MASK);
 
 		private int code;
 		private int awtCode;

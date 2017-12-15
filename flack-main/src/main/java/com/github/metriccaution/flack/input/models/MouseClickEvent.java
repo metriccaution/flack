@@ -1,5 +1,7 @@
 package com.github.metriccaution.flack.input.models;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -25,4 +27,20 @@ public class MouseClickEvent implements InputEventModel {
 		return code;
 	}
 
+	@Override
+	public boolean equals(final Object obj) {
+		if (!(obj instanceof MouseClickEvent)) {
+			return false;
+		}
+
+		final MouseClickEvent other = (MouseClickEvent)obj;
+
+		return Objects.equals(isDown(), other.isDown())
+				&& Objects.equals(getCode(), other.getCode());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(isDown(), getCode());
+	}
 }

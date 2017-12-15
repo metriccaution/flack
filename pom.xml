@@ -22,12 +22,15 @@
 		<shade.version>2.4.3</shade.version>
 		<exec.version>1.6.0</exec.version>
 		<jar.version>3.0.2</jar.version>
+		<pitest.version>1.2.5</pitest.version>
 		<!-- Dependency versions -->
 		<spark.version>2.6.0</spark.version>
 		<jackson.version>2.7.4</jackson.version>
 		<junit.version>4.12</junit.version>
 		<guava.version>23.0</guava.version>
 		<slf4j.version>1.7.25</slf4j.version>
+		<mockito.version>1.9.5</mockito.version>
+		<reflections.version>0.9.10</reflections.version>
 	</properties>
 
 	<dependencyManagement>
@@ -45,11 +48,6 @@
 			<dependency>
 				<groupId>com.github.metriccaution.flack</groupId>
 				<artifactId>flack-mouse</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.github.metriccaution.flack</groupId>
-				<artifactId>flack-ui</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -71,6 +69,16 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-simple</artifactId>
 				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${mockito.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.reflections</groupId>
+				<artifactId>reflections</artifactId>
+				<version>${reflections.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -101,6 +109,14 @@
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>exec-maven-plugin</artifactId>
 					<version>${exec.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.pitest</groupId>
+					<artifactId>pitest-maven</artifactId>
+					<version>${pitest.version}</version>
+					<configuration>
+						<coverageThreshold>80</coverageThreshold>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>

@@ -1,5 +1,7 @@
 package com.github.metriccaution.flack.input.service;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.io.IOException;
 import java.util.function.Function;
 
@@ -14,11 +16,15 @@ public class InputEventParser implements Function<String, InputEventModel> {
 	private final ObjectMapper mapper;
 
 	public InputEventParser(final ObjectMapper mapper) {
+		checkNotNull(mapper);
+
 		this.mapper = mapper;
 	}
 
 	@Override
 	public InputEventModel apply(final String t) {
+		checkNotNull(mapper);
+
 		try {
 			return mapper.readValue(t, InputEventModel.class);
 		} catch (final IOException e) {

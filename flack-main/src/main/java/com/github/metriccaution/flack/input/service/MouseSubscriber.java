@@ -1,5 +1,7 @@
 package com.github.metriccaution.flack.input.service;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.github.metriccaution.flack.input.models.InputEventModel;
 import com.github.metriccaution.flack.input.models.MouseClickEvent;
 import com.github.metriccaution.flack.input.models.MouseMoveEvent;
@@ -16,6 +18,8 @@ public class MouseSubscriber {
 	private final Mouse mouse;
 
 	public MouseSubscriber(final Mouse mouse) {
+		checkNotNull(mouse);
+
 		this.mouse = mouse;
 	}
 

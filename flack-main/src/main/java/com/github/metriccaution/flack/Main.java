@@ -2,6 +2,7 @@ package com.github.metriccaution.flack;
 
 import static spark.Spark.*;
 
+import java.awt.MouseInfo;
 import java.awt.Robot;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,12 +21,13 @@ public class Main {
 	// TODO - Define an actual logger
 	// TODO - Application-level crypto (WSS isn't really an option without massive cert warnings)
 	// TODO - Some sort of auth (e.g. PIN)
+	// TODO - Response data / errors
 
 	public static void main(final String[] args) throws Exception {
 		final InputEventParser parser = new InputEventParser(new ObjectMapper());
 
 		final Robot robot = new Robot();
-		final Mouse mouse = new Mouse(robot);
+		final Mouse mouse = new Mouse(robot, () -> MouseInfo.getPointerInfo().getLocation());
 		final MouseSubscriber service = new MouseSubscriber(mouse);
 
 		final EventBus messages = new EventBus();

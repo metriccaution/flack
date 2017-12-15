@@ -1,5 +1,7 @@
 package com.github.metriccaution.flack.input.ws;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.io.IOException;
 
 import org.eclipse.jetty.websocket.api.Session;
@@ -23,6 +25,9 @@ public class InputSocket {
 	private final EventBus events;
 
 	public InputSocket(final InputEventParser parser, final EventBus events) {
+		checkNotNull(parser);
+		checkNotNull(events);
+
 		this.parser = parser;
 		this.events = events;
 	}
@@ -31,18 +36,16 @@ public class InputSocket {
 	public void onMessage(final Session user, final String message) throws IOException {
 		try {
 			final InputEventModel event = parser.apply(message);
-			LOGGER.trace("Input: " + event);
+			LOGGER.info("Input: " + event);
 			events.post(event);
 		} catch (final IllegalArgumentException e) {
-			// TODO - As logger
-			e.printStackTrace();
+			LOGGER.debug("Unparsable websocket message", e);
 		}
 	}
 
 	@OnWebSocketError
 	public void onError(final Session user, final Throwable ex) {
-		// TODO - As logger
-		ex.printStackTrace();
+		LOGGER.error("Websocket message exception", ex);
 	}
 
 	@OnWebSocketConnect
