@@ -2,8 +2,6 @@ import ws from './main'
 import { sendMessages } from './messagesReducer'
 
 export default () => {
-  let prevState = undefined
-
   return (store) => {
     const wsConfig = store.getState().websocket.config
     const send = ws(wsConfig)

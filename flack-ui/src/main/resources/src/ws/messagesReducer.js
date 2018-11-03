@@ -7,7 +7,8 @@ export const sendMessages = (ids) => ({
   payload: ids
 })
 
-const idGen = () => Math.floor(Math.random() * 100000)
+let count = 0;
+const idGen = () => `${count++}`;
 
 /*
  * Stores the state for any messages that are currently in flight
@@ -18,7 +19,6 @@ export default (state = defaultState, action = {}) => {
     case 'sendMessages':
       const filteredMessages = state.pending.filter((msg) => action.payload.indexOf(msg.id) === -1)
       return Object.assign({}, state, { pending: filteredMessages })
-      break
 
     case 'mouse.move':
       const newMessage = {
@@ -26,7 +26,8 @@ export default (state = defaultState, action = {}) => {
         body: action
       }
       return Object.assign({}, state, { pending : state.pending.slice().concat(newMessage) })
-      break
+
+    default:
+      return state
   }
-  return state
 }

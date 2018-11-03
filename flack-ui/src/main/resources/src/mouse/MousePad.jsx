@@ -42,7 +42,9 @@ export default class MousePad extends React.Component {
         this.props.moveMouse(this.state.position)
     }
 
-    const interval = setInterval(tickFunction.bind(this), this.props.tickMillis)
+    this.setState({
+      interval: setInterval(tickFunction.bind(this), this.props.tickMillis)
+    })
   }
 
   componentWillUnmount() {
@@ -62,7 +64,7 @@ export default class MousePad extends React.Component {
   touchEvent(event) {
     const absPosition = {
       x : event.touches.item(0).clientX,
-      x : event.touches.item(0).clientY
+      y : event.touches.item(0).clientY
     }
     const elPosition = event.target.getBoundingClientRect()
 
