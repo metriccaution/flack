@@ -1,6 +1,6 @@
-import reducer from './reducer'
+import reducer from "./reducer";
 
-it("has the expected base state", () =>{
+it("has the expected base state", () => {
   expect(reducer()).toEqual({
     config: {
       url: "ws://localhost/control"
@@ -8,8 +8,8 @@ it("has the expected base state", () =>{
     messages: {
       pending: []
     }
-  })
-})
+  });
+});
 
 describe("Messages reducer", () => {
   it("sends a mouse move", () => {
@@ -19,23 +19,25 @@ describe("Messages reducer", () => {
       type: "mouse.move",
       x: 5,
       y: 10
-    })
+    });
 
     expect(afterQueueing).toEqual({
       config: {
         url: "ws://localhost/control"
       },
       messages: {
-        pending: [{
-          id: "0",
-          body: {
-            type: "mouse.move",
-            x: 5,
-            y: 10
+        pending: [
+          {
+            id: "0",
+            body: {
+              type: "mouse.move",
+              x: 5,
+              y: 10
+            }
           }
-        }]
+        ]
       }
-    })
+    });
 
     const afterSending = reducer(afterQueueing, {
       type: "sendMessages",
@@ -49,6 +51,6 @@ describe("Messages reducer", () => {
       messages: {
         pending: []
       }
-    })
-  })
-})
+    });
+  });
+});
