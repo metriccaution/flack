@@ -1,8 +1,7 @@
-/*
+/**
  * Handles making and maintaining a websocket connection
  */
-
-const ws = ({ url }) => {
+function ws({ url }) {
   const connection = new WebSocket(url);
 
   let ready = false;
@@ -23,6 +22,13 @@ const ws = ({ url }) => {
     // Otherwise, put it on a queue of messages to send
     pending.push(data);
   };
-};
+}
 
-export default ws;
+export default function websocketConnection(...args) {
+  switch (process.env.NODE_ENV) {
+    case "development":
+      return (...args) => console.log(...args);
+    default:
+      return ws(...args);
+  }
+}

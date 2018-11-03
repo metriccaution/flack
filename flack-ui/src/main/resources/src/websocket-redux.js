@@ -1,7 +1,10 @@
-import ws from "./main";
-import { sendMessages } from "./messagesReducer";
+import { sendMessages } from "./redux";
 
-export default () => {
+/**
+ * How messages actually get sent down the websocket - Subscribes to Redux, and
+ * sends any messages that get queued up.
+ */
+export default ws => {
   return store => {
     const wsConfig = store.getState().websocket.config;
     const send = ws(wsConfig);
