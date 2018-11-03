@@ -17,7 +17,7 @@
 			<resource>
 				<directory>src/main/resources</directory>
 				<includes>
-					<include>dist/**/*.*</include>
+					<include>build/**/*.*</include>
 				</includes>
 			</resource>
 		</resources>
@@ -27,7 +27,7 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<includes>
-						<include>/dist/**</include>
+						<include>/build/**</include>
 						<include>/com/github/metriccaution/**</include>
 					</includes>
 				</configuration>
@@ -43,7 +43,7 @@
 							<executable>npm</executable>
 							<arguments>
 								<argument>run</argument>
-								<argument>dist</argument>
+								<argument>build</argument>
 							</arguments>
 							<workingDirectory>${project.basedir}/src/main/resources</workingDirectory>
 						</configuration>

@@ -5,5 +5,5 @@ package com.github.metriccaution.flack.ui;
  * directory from the jar contains the static resources etc.
  */
 public class StaticResourcesConfig {
-	public static final String STATIC_RESOURCES_DIR = "/dist";
+	public static final String STATIC_RESOURCES_DIR = "/build";
 }
