@@ -1,27 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { connect, Provider } from "react-redux";
-import createStore from "./redux";
+import createStore, { moveMouse } from "./redux";
 import wsSub from "./websocket-redux";
-import MousePad from "./mouse/MousePad.jsx";
-import { move } from "./mouse/actions";
-import websocketConnection from "./websocket-connection";
+import MousePad from "./components/mouse/MousePad.jsx";
+import openConnection from "./websocket-connection";
 
 const store = createStore();
-wsSub(websocketConnection)(store);
+wsSub(openConnection)(store);
 
-const App = props => (
-  <div>
-    <MousePad moveMouse={props.moveMouse} tickMillis={10} maxPerTick={10} />
-  </div>
-);
+const App = props => {
+  return (
+    <div>
+      <MousePad
+        moveMouse={props.moveMouse}
+        tickMillis={props.mouseConfig.millisPerTick}
+        maxPerTick={props.mouseConfig.maxPixelsPerTick}
+      />
+    </div>
+  );
+};
 
 const Joined = connect(
   state => ({
-    mousePosition: state.mouse.position
+    mouseConfig: state.mouse.config
   }),
   dispatch => ({
-    moveMouse: position => dispatch(move(position))
+    moveMouse: ({ x, y }) => dispatch(moveMouse({ x, y }))
   })
 )(App);
 

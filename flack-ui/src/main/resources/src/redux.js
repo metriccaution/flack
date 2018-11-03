@@ -14,17 +14,33 @@ const idGen = (() => {
 /*
  * Mouse state
  */
+const mouseActions = {
+  move: "move"
+};
+
+export function moveMouse({ x, y }) {
+  return {
+    type: mouseActions.move,
+    x,
+    y
+  };
+}
+
 function mouseReducer(
   state = {
     position: {
       x: 0,
       y: 0
+    },
+    config: {
+      millisPerTick: 10,
+      maxPixelsPerTick: 10
     }
   },
   action = {}
 ) {
   switch (action.type) {
-    case "mouse.move":
+    case mouseActions.move:
       return Object.assign({}, state, {
         position: { x: action.x, y: action.y }
       });
@@ -37,9 +53,12 @@ function mouseReducer(
 /*
  * Websocket state
  */
+const websocketActions = {
+  sendMessages: "sendMessages"
+};
 
 export const sendMessages = ids => ({
-  type: "sendMessages",
+  type: websocketActions.sendMessages,
   payload: ids
 });
 
@@ -51,7 +70,7 @@ function pendingMessagesReducer(
 ) {
   switch (action.type) {
     // Mark some list of messages as sent
-    case "sendMessages":
+    case websocketActions.sendMessages:
       return Object.assign({}, state, {
         pending: state.pending.filter(
           msg => action.payload.indexOf(msg.id) === -1
@@ -59,10 +78,14 @@ function pendingMessagesReducer(
       });
 
     // Send a mouse move message
-    case "mouse.move":
+    case mouseActions.move:
       const newMessage = {
         id: idGen(),
-        body: action
+        body: {
+          type: "mouse.move",
+          x: action.x,
+          y: action.y
+        }
       };
       return Object.assign({}, state, {
         pending: state.pending.slice().concat(newMessage)

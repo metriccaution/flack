@@ -1,4 +1,4 @@
-import { reducer } from "./redux";
+import { reducer, moveMouse } from "./redux";
 
 it("has the expected base state", () => {
   expect(reducer()).toEqual({
@@ -6,6 +6,10 @@ it("has the expected base state", () => {
       position: {
         x: 0,
         y: 0
+      },
+      config: {
+        maxPixelsPerTick: 10,
+        millisPerTick: 10
       }
     },
     websocket: {
@@ -23,17 +27,23 @@ describe("Messages reducer", () => {
   it("sends a mouse move", () => {
     const base = reducer();
 
-    const afterQueueing = reducer(base, {
-      type: "mouse.move",
-      x: 5,
-      y: 10
-    });
+    const afterQueueing = reducer(
+      base,
+      moveMouse({
+        x: 5,
+        y: 10
+      })
+    );
 
     expect(afterQueueing).toEqual({
       mouse: {
         position: {
           x: 5,
           y: 10
+        },
+        config: {
+          maxPixelsPerTick: 10,
+          millisPerTick: 10
         }
       },
       websocket: {
@@ -65,6 +75,10 @@ describe("Messages reducer", () => {
         position: {
           x: 5,
           y: 10
+        },
+        config: {
+          maxPixelsPerTick: 10,
+          millisPerTick: 10
         }
       },
       websocket: {
