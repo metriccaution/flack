@@ -1,0 +1,13 @@
+.mouse-button {
+  width: 30%;
+  height: 2em;
+  background-color: blue;
+  margin-top: 0.5em;
+  margin-left: 1%;
+  margin-right: 1%;
+  display: inline-block;
+}
+
+.mouse-button.mouse-button__down {
+  background-color: red;
+}

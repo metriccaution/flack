@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 
 /**
  * An instruction to click the mouse
@@ -42,5 +43,13 @@ public class MouseClickEvent implements InputEventModel {
 	@Override
 	public int hashCode() {
 		return Objects.hash(isDown(), getCode());
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+				.add("Button", getCode())
+				.add("Down", isDown())
+				.toString();
 	}
 }

@@ -6,16 +6,12 @@ import Url from "url-parse";
  */
 const baseUrl = new Url(document.location.href, false);
 
-const idGen = (() => {
-  let count = 0;
-  return () => `${count++}`;
-})();
-
 /*
  * Mouse state
  */
 const mouseActions = {
-  move: "move"
+  move: "move",
+  click: "click"
 };
 
 export function moveMouse({ x, y }) {
@@ -26,11 +22,24 @@ export function moveMouse({ x, y }) {
   };
 }
 
-function mouseReducer(
+export function click({ down, button }) {
+  return {
+    type: mouseActions.click,
+    down,
+    button
+  };
+}
+
+export function mouseReducer(
   state = {
     position: {
       x: 0,
       y: 0
+    },
+    click: {
+      left: false,
+      right: false,
+      middle: false
     },
     config: {
       millisPerTick: 10,
@@ -44,6 +53,12 @@ function mouseReducer(
       return Object.assign({}, state, {
         position: { x: action.x, y: action.y }
       });
+
+    case mouseActions.click:
+      const diff = {};
+      diff[action.button] = action.down;
+      const clickState = Object.assign({}, state.click, diff);
+      return Object.assign({}, state, { click: clickState });
 
     default:
       return state;
@@ -62,8 +77,22 @@ export const sendMessages = ids => ({
   payload: ids
 });
 
+function convertClickType(name) {
+  switch (name) {
+    case "left":
+      return 0;
+    case "right":
+      return 1;
+    case "middle":
+      return 2;
+    default:
+      throw new Error(`Unrecognised click code ${name}`);
+  }
+}
+
 function pendingMessagesReducer(
   state = {
+    nextId: 0,
     pending: []
   },
   action = {}
@@ -79,8 +108,8 @@ function pendingMessagesReducer(
 
     // Send a mouse move message
     case mouseActions.move:
-      const newMessage = {
-        id: idGen(),
+      const newMoveMessage = {
+        id: `${state.nextId++}`,
         body: {
           type: "mouse.move",
           x: action.x,
@@ -88,7 +117,20 @@ function pendingMessagesReducer(
         }
       };
       return Object.assign({}, state, {
-        pending: state.pending.slice().concat(newMessage)
+        pending: state.pending.concat(newMoveMessage)
+      });
+
+    case mouseActions.click:
+      const newClickMessage = {
+        id: `${state.nextId++}`,
+        body: {
+          type: "mouse.click",
+          code: convertClickType(action.button),
+          down: Boolean(action.down)
+        }
+      };
+      return Object.assign({}, state, {
+        pending: state.pending.concat(newClickMessage)
       });
 
     default:
