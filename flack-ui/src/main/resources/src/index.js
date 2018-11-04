@@ -13,14 +13,12 @@ wsSub(openConnection)(store);
 
 const App = props => {
   return (
-    <div
-      style={{
-        height: "100%"
-      }}
-    >
+    <div className="full-height">
       <div
         style={{
-          height: "90%"
+          height: "89%",
+          margin: 0,
+          padding: 0
         }}
       >
         <MousePad
@@ -31,6 +29,7 @@ const App = props => {
       </div>
       <div
         style={{
+          paddingTop: "0.25%",
           height: "10%"
         }}
       >

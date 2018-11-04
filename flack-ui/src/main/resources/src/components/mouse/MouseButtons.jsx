@@ -5,7 +5,9 @@ const MouseButton = ({ button, click, down }) => (
   <span
     className={down ? "mouse-button mouse-button__down" : "mouse-button"}
     onMouseDown={() => click(true)}
+    onTouchStart={() => click(true)}
     onMouseUp={() => click(false)}
+    onTouchEnd={() => click(false)}
   />
 );
 
@@ -24,5 +26,5 @@ export default ({ click, clicked }) => {
     />
   ));
 
-  return <div>{buttons}</div>;
+  return <div className="mouse-button-container">{buttons}</div>;
 };

@@ -1,5 +1,8 @@
 html {
+  margin: 0;
+  padding: 0;
   height: 100%;
+  background-color: #4d4c4c;
 }
 
 body {
@@ -8,6 +11,8 @@ body {
   height: 100%;
 }
 
-#root {
+.full-height {
   height: 100%;
+  padding: 0px;
+  margin: 0px;
 }
