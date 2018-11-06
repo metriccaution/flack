@@ -10,7 +10,7 @@
     "react-redux": "^5.1.0",
     "react-scripts": "2.1.1",
     "redux": "^4.0.1",
-    "url-parse": "^1.4.3"
+    "url-parse": "^1.4.4"
   },
   "scripts": {
     "start": "react-scripts start",
