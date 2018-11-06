@@ -32,7 +32,11 @@ From the top-level of the project:
 mvn install
 ```
 
-This will produce a standalone jar file in `flack-main/target`. It can be started using `java -jar <jar-name>`.
+This will produce a standalone jar file in `flack-main/target`.
+
+### Running
+
+After building (see above), Flack can be started using `java -jar <jar-name>`.
 
 ### Test
 
